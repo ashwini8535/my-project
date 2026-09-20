@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TheChaiShop&Co CRM Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <h1>TheChaiShop&Co CRM</h1>
+
+    <h2 class="dashboard-title">Welcome to CRM Dashboard</h2>
+
+    <!-- Statistics -->
+
+    <div class="dashboard-cards">
+
+        <div class="card">
+            <h3>Total Customers</h3>
+            <h2>{{ customers }}</h2>
+            <p>Registered Customers</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Products</h3>
+            <h2>{{ products }}</h2>
+            <p>Available Products</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Orders</h3>
+            <h2>{{ orders }}</h2>
+            <p>Customer Orders</p>
+        </div>
+
+        <div class="card">
+            <h3>Interactions</h3>
+            <h2>{{ interactions }}</h2>
+            <p>Customer Interactions</p>
+        </div>
+
+    </div>
+
+
+    <!-- Modules -->
+
+    <h2>CRM Modules</h2>
+
+    <div class="modules">
+
+        <div class="module-card">
+            <h3>Customer Management</h3>
+            <p>Manage customer information and details.</p>
+
+            <br>
+
+            <a href="/customers">
+                <button>Open Module</button>
+            </a>
+        </div>
+
+
+        <div class="module-card">
+            <h3>Product & Order Management</h3>
+            <p>Manage products and customer orders.</p>
+
+            <br>
+
+            <a href="/products">
+                <button>Open Module</button>
+            </a>
+        </div>
+
+
+        <div class="module-card">
+            <h3>Customer Interaction & Feedback</h3>
+            <p>Manage enquiries, complaints and feedback.</p>
+
+            <br>
+
+            <a href="/interactions">
+                <button>Open Module</button>
+            </a>
+        </div>
+
+
+        <div class="module-card">
+            <h3>Reports</h3>
+            <p>View customer, product, order and sales reports.</p>
+
+            <br>
+
+            <a href="/reports">
+                <button>Open Reports</button>
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- Logout -->
+
+    <br><br>
+
+    <div style="text-align:center;">
+
+        <a href="/logout">
+            <button class="btn-danger">Logout</button>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Reports - TheChaiShop&Co</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="report-container">
+
+    <h1>TheChaiShop&Co - Reports</h1>
+
+    <a href="/dashboard" class="back-link">
+        ← Back to Dashboard
+    </a>
+
+
+    <h2>CRM Summary Report</h2>
+
+    <div class="report-cards">
+
+        <div class="report-card">
+            <h3>Total Customers</h3>
+            <h2>{{ total_customers }}</h2>
+            <p>Registered Customers</p>
+        </div>
+
+        <div class="report-card">
+            <h3>Total Products</h3>
+            <h2>{{ total_products }}</h2>
+            <p>Available Products</p>
+        </div>
+
+        <div class="report-card">
+            <h3>Total Orders</h3>
+            <h2>{{ total_orders }}</h2>
+            <p>Customer Orders</p>
+        </div>
+
+        <div class="report-card">
+            <h3>Interactions</h3>
+            <h2>{{ total_interactions }}</h2>
+            <p>Customer Interactions</p>
+        </div>
+
+        <div class="report-card">
+            <h3>Total Sales</h3>
+            <h2>₹{{ "%.2f"|format(total_sales) }}</h2>
+            <p>Total Order Value</p>
+        </div>
+
+    </div>
+
+
+    <h2>Detailed Report</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Report Item</th>
+                    <th>Total</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Total Customers</td>
+                    <td>{{ total_customers }}</td>
+                </tr>
+
+                <tr>
+                    <td>Total Products</td>
+                    <td>{{ total_products }}</td>
+                </tr>
+
+                <tr>
+                    <td>Total Orders</td>
+                    <td>{{ total_orders }}</td>
+                </tr>
+
+                <tr>
+                    <td>Customer Interactions</td>
+                    <td>{{ total_interactions }}</td>
+                </tr>
+
+                <tr>
+                    <td>Total Sales</td>
+                    <td>₹{{ "%.2f"|format(total_sales) }}</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <h2>Report Information</h2>
+
+    <form>
+
+        <p>
+            This report provides a summary of customer,
+            product, order and interaction information
+            maintained by TheChaiShop&Co CRM application.
+        </p>
+
+        <br>
+
+        <p>
+            Total Sales represents the combined value
+            of all recorded customer orders.
+        </p>
+
+    </form>
+
+
+    <div style="text-align:center; margin-top:25px;">
+
+        <a href="/dashboard">
+            <button type="button">
+                Back to Dashboard
+            </button>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

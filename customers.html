@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Customer Management - TheChaiShop&Co</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Customer Management</h1>
+
+    <a href="/dashboard" class="back-link">
+        ← Back to Dashboard
+    </a>
+
+
+    <!-- =========================
+         ADD CUSTOMER
+         ========================= -->
+
+    <h2>Add New Customer</h2>
+
+    <form method="POST" action="/add_customer">
+
+        <label>Customer Name</label>
+
+        <input type="text"
+               name="name"
+               placeholder="Enter customer name"
+               required>
+
+
+        <label>Phone Number</label>
+
+        <input type="text"
+               name="phone"
+               placeholder="Enter phone number"
+               required>
+
+
+        <label>Email</label>
+
+        <input type="email"
+               name="email"
+               placeholder="Enter email address">
+
+
+        <label>Address</label>
+
+        <textarea name="address"
+                  placeholder="Enter customer address"></textarea>
+
+
+        <button type="submit">
+            Add Customer
+        </button>
+
+    </form>
+
+
+    <!-- =========================
+         CUSTOMER LIST
+         ========================= -->
+
+    <h2>Customer List</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for customer in customers %}
+
+                <tr>
+
+                    <td>
+                        {{ customer['id'] }}
+                    </td>
+
+                    <td>
+                        {{ customer['name'] }}
+                    </td>
+
+                    <td>
+                        {{ customer['phone'] }}
+                    </td>
+
+                    <td>
+                        {{ customer['email'] }}
+                    </td>
+
+                    <td>
+                        {{ customer['address'] }}
+                    </td>
+
+                    <td>
+
+                        <a href="/delete_customer/{{ customer['id'] }}"
+                           onclick="return confirm('Are you sure you want to delete this customer?');">
+
+                            <button type="button"
+                                    class="btn-danger">
+                                Delete
+                            </button>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="6"
+                        style="text-align:center;">
+
+                        No customers found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

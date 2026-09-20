@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products & Orders - TheChaiShop&Co</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Product & Order Management</h1>
+
+    <a href="/dashboard" class="back-link">
+        ← Back to Dashboard
+    </a>
+
+    <!-- ==============================
+         ADD PRODUCT
+         ============================== -->
+
+    <h2>Add New Product</h2>
+
+    <form method="POST" action="/add_product">
+
+        <label>Product Name</label>
+
+        <input type="text"
+               name="name"
+               placeholder="Example: Masala Chai"
+               required>
+
+        <label>Price (₹)</label>
+
+        <input type="number"
+               name="price"
+               step="0.01"
+               min="0"
+               placeholder="Enter price"
+               required>
+
+        <button type="submit">
+            Add Product
+        </button>
+
+    </form>
+
+
+    <!-- ==============================
+         PRODUCT LIST
+         ============================== -->
+
+    <h2>Product List</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for product in products %}
+
+                <tr>
+
+                    <td>{{ product['id'] }}</td>
+
+                    <td>{{ product['name'] }}</td>
+
+                    <td>₹{{ "%.2f"|format(product['price']) }}</td>
+
+                    <td>
+
+                        <a href="/delete_product/{{ product['id'] }}"
+                           onclick="return confirm('Delete this product?');">
+
+                            <button class="btn-danger">
+                                Delete
+                            </button>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="4" style="text-align:center;">
+                        No products available.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- ==============================
+         CREATE ORDER
+         ============================== -->
+
+    <h2>Create New Order</h2>
+
+    <form method="POST" action="/add_order">
+
+        <label>Customer Name</label>
+
+        <input type="text"
+               name="customer_name"
+               placeholder="Enter customer name"
+               required>
+
+
+        <label>Product Name</label>
+
+        <input type="text"
+               name="product_name"
+               placeholder="Enter product name"
+               required>
+
+
+        <label>Quantity</label>
+
+        <input type="number"
+               name="quantity"
+               min="1"
+               placeholder="Enter quantity"
+               required>
+
+
+        <label>Total Amount (₹)</label>
+
+        <input type="number"
+               name="total"
+               step="0.01"
+               min="0"
+               placeholder="Enter total amount"
+               required>
+
+
+        <button type="submit">
+            Create Order
+        </button>
+
+    </form>
+
+
+    <!-- ==============================
+         ORDER LIST
+         ============================== -->
+
+    <h2>Order List</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for order in orders %}
+
+                <tr>
+
+                    <td>{{ order['id'] }}</td>
+
+                    <td>{{ order['customer_name'] }}</td>
+
+                    <td>{{ order['product_name'] }}</td>
+
+                    <td>{{ order['quantity'] }}</td>
+
+                    <td>
+                        ₹{{ "%.2f"|format(order['total']) }}
+                    </td>
+
+                    <td>
+
+                        <a href="/delete_order/{{ order['id'] }}"
+                           onclick="return confirm('Delete this order?');">
+
+                            <button class="btn-danger">
+                                Delete
+                            </button>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="6" style="text-align:center;">
+                        No orders found.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

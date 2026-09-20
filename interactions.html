@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Customer Interaction & Feedback</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Customer Interaction & Feedback</h1>
+
+    <a href="/dashboard" class="back-link">
+        ← Back to Dashboard
+    </a>
+
+    <!-- ADD INTERACTION -->
+
+    <h2>Add Customer Interaction</h2>
+
+    <form method="POST" action="/add_interaction">
+
+        <label>Customer Name</label>
+
+        <input type="text"
+               name="customer_name"
+               placeholder="Enter customer name"
+               required>
+
+        <label>Interaction Type</label>
+
+        <select name="type" required>
+
+            <option value="">Select Type</option>
+            <option value="Enquiry">Enquiry</option>
+            <option value="Complaint">Complaint</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Suggestion">Suggestion</option>
+
+        </select>
+
+        <label>Message / Feedback</label>
+
+        <textarea name="message"
+                  placeholder="Enter customer message"
+                  required></textarea>
+
+        <label>Status</label>
+
+        <select name="status" required>
+
+            <option value="">Select Status</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+
+        </select>
+
+        <button type="submit">
+            Add Interaction
+        </button>
+
+    </form>
+
+
+    <!-- INTERACTION LIST -->
+
+    <h2>Customer Interaction List</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Type</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for interaction in interactions %}
+
+                <tr>
+
+                    <td>{{ interaction['id'] }}</td>
+
+                    <td>{{ interaction['customer_name'] }}</td>
+
+                    <td>{{ interaction['type'] }}</td>
+
+                    <td>{{ interaction['message'] }}</td>
+
+                    <td>{{ interaction['status'] }}</td>
+
+                    <td>
+
+                        <a href="/delete_interaction/{{ interaction['id'] }}"
+                           onclick="return confirm('Delete this interaction?');">
+
+                            <button type="button"
+                                    class="btn-danger">
+                                Delete
+                            </button>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="6"
+                        style="text-align:center;">
+
+                        No customer interactions found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
